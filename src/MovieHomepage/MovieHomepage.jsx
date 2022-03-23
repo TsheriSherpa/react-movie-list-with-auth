@@ -1,40 +1,37 @@
-import React from 'react' 
+import React from 'react'
 import { movieActions } from '../_actions';
 import { connect } from 'react-redux';
-import {MovieList}  from './MovieList';
+import { MovieList } from './MovieList';
 
 class MovieHomepage extends React.Component {
-    
+
     constructor(props) {
         super(props);
     }
 
-    componentWillMount() {
+    componentDidMount() {
         this.props.getMovies();
     }
-    
-    // componentDidUpdate() {
-    //     this.props.getMovies()
-    // }
-    
-    render () {
-        var movies = this.props.movies.movies;   
-        if ( typeof movies == 'undefined' || movies == [] || this.props.movies.loading) {
+
+    render() {
+        var movies = this.props.movies.movies;
+
+        if (typeof movies == 'undefined' || movies == [] || this.props.movies.loading) {
             return (
                 <div className='row'>
-                    <span  className="col d-flex justify-content-center vertical-center" style={{ "margin": "0 auto", "fontWeight": "bold" }}>
+                    <span className="col d-flex justify-content-center vertical-center" >
                         Loading...
                     </span>
                 </div>
             )
-        }else{    
-            return (            
+        } else {
+            return (
                 <div className="row list">
-                {
-                    movies.categories.map(category => 
-                        <MovieList category={category} key={category.name}/>
-                    )
-                }
+                    {
+                        movies.categories.map(category =>
+                            <MovieList category={category} key={category.name} />
+                        )
+                    }
                 </div>
             );
         }
@@ -46,7 +43,7 @@ class MovieHomepage extends React.Component {
 function mapState(state) {
     const { authentication, movies } = state;
     const { user } = authentication;
-    return { user, movies};
+    return { user, movies };
 }
 
 const actionCreators = {
@@ -55,3 +52,4 @@ const actionCreators = {
 
 const connectedMovieHomePage = connect(mapState, actionCreators)(MovieHomepage);
 export { connectedMovieHomePage as MovieHomepage };
+

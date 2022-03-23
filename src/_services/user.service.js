@@ -15,7 +15,7 @@ function login(email, password) {
     const requestOptions = {
         crossDomain: true,
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'  },
+        headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' },
         body: JSON.stringify({ email, password })
     };
 
@@ -88,7 +88,7 @@ function handleResponse(response) {
                 logout();
                 // location.reload(true);
             }
-            
+
             const error = (text && text.message) || response.statusText;
             return Promise.reject(error);
         }

@@ -8,7 +8,7 @@ import { PrivateRoute } from '../_components';
 import { HomePage } from '../HomePage';
 import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
-import { MovieHomepage } from '../MovieHomepage';
+import { MovieDetailPage, MovieHomepage } from '../MovieHomepage';
 import { Navbar } from '../NavbarPage';
 // import '../../public/index.css';
 
@@ -23,14 +23,14 @@ class App extends React.Component {
     }
 
     render() {
-        const { alert } = this.props;
         return (
             <div className="container-fluid movie-app">
                 <Router history={history}>
-                    <Navbar/>
+                    <Navbar />
                     <Switch>
                         <PrivateRoute exact path="/" component={HomePage} />
                         <PrivateRoute path="/movies" component={MovieHomepage} />
+                        <PrivateRoute path="/movies/:id" component={MovieDetailPage} />
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
                         <Redirect from="*" to="/" />

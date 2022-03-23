@@ -16,7 +16,21 @@ function getMovies() {
     function failure(error) { return { type: movieConstants.GETALL_FAILURE, error } }
 }
 
+function getMovie(movieId) {
+    return dispatch => {
+        dispatch(request());
+        movieService.getDetail(movieId)
+            .then(
+                movie => dispatch(success(movie)),
+                error => dispatch(failure(error.toString()))
+            );
+    };
+
+    function request() { return { type: movieConstants.GETDETAIL_REQUEST } }
+    function success(movie) { return { type: movieConstants.GETDETAIL_SUCCESS, movie } }
+    function failure(error) { return { type: movieConstants.GETDETAIL_FAILURE, error } }
+}
 export const movieActions = {
-    getMovies
+    getMovies, getMovie
 };
 

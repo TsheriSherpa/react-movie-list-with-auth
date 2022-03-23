@@ -1,7 +1,7 @@
 import { authHeader } from '../_helpers';
 
 export const movieService = {
-    getAll
+    getAll, getDetail
 }
 
 function getAll() {
@@ -18,10 +18,18 @@ function handleResponse(response) {
             if (response.status === 401) {
                 logout();
             }
-            
+
             const error = (text && text.message) || response.statusText;
             return Promise.reject(error);
         }
         return text;
     });
+}
+
+function getDetail(movieId) {
+    const requestOptions = {
+        method: 'GET',
+        headers: authHeader()
+    };
+    return fetch('https://mnm.truestreamz.com/api/net-tv/movies/' + movieId + '/detail', requestOptions).then(handleResponse);
 }
