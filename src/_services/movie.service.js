@@ -1,3 +1,4 @@
+import CONFIG from "../config"
 import { authHeader } from '../_helpers';
 
 export const movieService = {
@@ -9,7 +10,7 @@ function getAll() {
         method: 'GET',
         headers: authHeader()
     };
-    return fetch('https://mnm.truestreamz.com/api/net-tv/movies', requestOptions).then(handleResponse);
+    return fetch(`${CONFIG.API_URL}/api/net-tv/movies`, requestOptions).then(handleResponse);
 };
 
 function handleResponse(response) {

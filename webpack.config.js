@@ -21,11 +21,6 @@ module.exports = {
 		allowedHosts: "all",
 		historyApiFallback: true
 	},
-	externals: {
-		'config': {
-			apiUrl: "https://mnm.truestreamz.com"
-		}
-	},
 	module: {
 		rules: [
 			{
