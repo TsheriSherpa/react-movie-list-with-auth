@@ -1,5 +1,5 @@
 import React from "react";
-import { history } from '../_helpers';
+import { Link } from "react-router-dom";
 
 export class MovieView extends React.Component {
     constructor(props) {
@@ -9,12 +9,12 @@ export class MovieView extends React.Component {
     render() {
         const movie = this.props.movie;
         return (
-            <div className="image-container movieItem" onClick={() => { history.push('/movies/' + movie.id) }}>
-                <img src={movie.logo} style={{ height: "25vh" }} alt={movie.name} />
+            <Link to={`/movies/` + movie.id} className="image-container movieItem" flim={movie}>
+                <img src={movie.logo} style={{ height: "25vh", maxWidth: "100%" }} alt={movie.name} />
                 <div className="overlay movie-item mr-2">
                     <span className="movie-title">{movie.name}</span>
                 </div>
-            </div>
+            </Link >
         );
     }
 }

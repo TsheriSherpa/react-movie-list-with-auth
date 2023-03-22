@@ -1,34 +1,49 @@
-const path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-    mode: 'development',
-    resolve: {
-        extensions: ['.js', '.jsx']
-    },
-    module: {
-        rules: [
-            {
-                test: /\.jsx?$/,
-                loader: 'babel-loader'
-            },
-            {
-                test: /\.css$/i,
-                loader: "css-loader"
-            }
-        ]
-    },
-    stats: { children: false }, 
-    plugins: [new HtmlWebpackPlugin({
-        template: path.resolve(__dirname,'/public', 'index.html'),
-    })],
-    devServer: {
-        historyApiFallback: true
-    },
-    externals: {
-        // global app config object
-        config: JSON.stringify({
-            apiUrl: 'https://mnmdev.truestreamz.com/api'
-        })
-    }
-}
+	entry: './src/index.js',
+	output: {
+		path: path.join(__dirname, "/dist"), // the bundle output path
+		filename: "bundle.js", // the name of the bundle
+	},
+	plugins: [
+		new HtmlWebpackPlugin({
+			template: "./public/index.html", // to import index.html file inside index.js
+		})
+	],
+	resolve: {
+		extensions: ['.js', '.jsx'],
+	},
+	devServer: {
+		port: 4000, // you can change the port
+		allowedHosts: "all",
+		historyApiFallback: true
+	},
+	externals: {
+		'config': {
+			apiUrl: "https://mnm.truestreamz.com"
+		}
+	},
+	module: {
+		rules: [
+			{
+				test: /\.(js|jsx)$/, // .js and .jsx files
+				exclude: /node_modules/, // excluding the node_modules folder
+				use: {
+					loader: "babel-loader",
+				},
+			},
+			{
+				test: /\.(sa|sc|c)ss$/, // styles files
+				use: ["style-loader", "css-loader", "sass-loader"],
+			},
+			{
+				test: /\.(png|woff|woff2|eot|ttf|svg)$/i, // to import images and fonts
+				loader: "url-loader",
+				options: { limit: false },
+			},
+		],
+	},
+};

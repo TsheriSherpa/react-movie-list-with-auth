@@ -10,7 +10,8 @@ import { LoginPage } from '../LoginPage';
 import { RegisterPage } from '../RegisterPage';
 import { MovieDetailPage, MovieHomepage } from '../MovieHomepage';
 import { Navbar } from '../NavbarPage';
-// import '../../public/index.css';
+import '../styles/index.css';
+import { withRouter } from 'react-router';
 
 class App extends React.Component {
     constructor(props) {
@@ -29,8 +30,8 @@ class App extends React.Component {
                     <Navbar />
                     <Switch>
                         <PrivateRoute exact path="/" component={HomePage} />
+                        <PrivateRoute exact path="/movies/:id" component={withRouter(MovieDetailPage)} />
                         <PrivateRoute path="/movies" component={MovieHomepage} />
-                        <PrivateRoute path="/movies/:id" component={MovieDetailPage} />
                         <Route path="/login" component={LoginPage} />
                         <Route path="/register" component={RegisterPage} />
                         <Redirect from="*" to="/" />

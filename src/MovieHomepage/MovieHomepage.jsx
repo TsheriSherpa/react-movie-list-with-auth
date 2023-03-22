@@ -14,6 +14,7 @@ class MovieHomepage extends React.Component {
     }
 
     render() {
+
         var movies = this.props.movies.movies;
 
         if (typeof movies == 'undefined' || movies == [] || this.props.movies.loading) {
